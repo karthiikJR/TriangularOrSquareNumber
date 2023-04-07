@@ -37,23 +37,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkNum(View view){
-        TextView tv = findViewById(R.id.etInput);
-        int num = Integer.parseInt(tv.getText().toString());
 
-        Log.i("number", tv.getText().toString());
-
-        ck.num = num;
         String message;
 
-        if(ck.isSqr() && ck.isTri()){
-            message = "It is both Square number and Triangular number";
+        try {
+
+            TextView tv = findViewById(R.id.etInput);
+            ck.num = Integer.parseInt(tv.getText().toString());
+
+            Log.i("number", tv.getText().toString());
+
+
+
+            if(ck.isSqr() && ck.isTri()){
+                message = "It is both Square number and Triangular number";
+            }
+            else if(ck.isSqr())
+                message = "It is a Square number";
+            else if (ck.isTri())
+                message = "It is a Triangular number";
+            else
+                message = "It is not a Square number or a Triangular number";
+
+        }catch(Exception e){
+            message = "Enter a valid number!";
         }
-        else if(ck.isSqr())
-            message = "It is a Square number";
-        else if (ck.isTri())
-            message = "It is a Triangular number";
-        else
-            message = "It is not a Square number or a Triangular number";
         Toast t = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         t.setGravity(Gravity.CENTER,0,0);
         t.show();
